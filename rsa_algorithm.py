@@ -5,9 +5,11 @@ import math
 def is_prime(number):
     if number <= 1:
         return False
-    for i in range(2, int(number ** 0.5) + 1):
+
+    for i in range(2, number):
         if number % i == 0:
             return False
+
     return True
 
 
@@ -47,17 +49,21 @@ print("\nPublic Key =", (e, n))
 print("Private Key =", (d, n))
 
 
+
 #encryption
-message = 42
 
-ciphertext = pow(message, e, n)
+message = int(input(f"Enter message (0 to {n - 1}): "))
 
-print("\nOriginal message =", message)
-print("Encrypted message =", ciphertext)
+if message < 0 or message >= n:
+    print(f"Invalid message. Message must satisfy 0 <= message < {n}")
+else:
+    ciphertext = pow(message, e, n)
+    print("Original message:", message)
+    print("Encrypted message:", ciphertext)
 
 
-#DECRYPTION 
+    #decryption
 
-decrypted_message = pow(ciphertext, d, n)
+    decrypted_message = pow(ciphertext, d, n)
 
-print("Decrypted message =", decrypted_message)
+    print("Decrypted message:", decrypted_message)
